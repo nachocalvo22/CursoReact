@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 
 import NavBar from './components/navBar/NavBar';
 import ItemListContainer from './components/containers/ItemListContainer/ItemListContainer';
@@ -14,12 +15,16 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div>
-    <NavBar />
-    <Formulario />
-    <ItemListContainer  />
+    <BrowserRouter>
+      <div>
+        <NavBar />
+        <Routes>
+          <Route path='/' element={<ItemListContainer  />}/>
+          <Route path='/Form' element={<Formulario />}/>
 
-    </div>
+        </Routes>
+      </div>
+    </BrowserRouter>
 
   )
 }

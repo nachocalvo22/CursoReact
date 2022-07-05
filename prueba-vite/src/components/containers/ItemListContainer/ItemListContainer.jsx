@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import { gFetch } from '../../helpers/gFetch'
+import ItemList from './ItemList'
 
 
  const ItemListContainer = () => {
@@ -12,26 +13,18 @@ import { gFetch } from '../../helpers/gFetch'
     gFetch
     .then( res => setProducts(res))
     .catch( err => console.log(err))
+    .finally
 
-    },[])
+    },[4000])
 
 
     
   console.log(products);
   return (
     <div>
-        {products.map(prod => <div
-                                      key={prod.id}
-                                      className="card">
-                                      <div className="card-header">
-                                        Comidas
-                                      </div>
-                                      <div className="card-body">
-                                        <h5 className="card-title">{prod.nombre}</h5>
-                                        <p className="card-text">Precio: ${prod.precio}</p>
-                                        <a href="#" className="btn btn-primary">Comprar</a>
-                                      </div>
-                              </div>)}
+
+      <ItemList producto={products}/>
+
     </div>
   )
 }
