@@ -23,7 +23,7 @@ import ItemList from './ItemList'
   return (
     <div>
 
-      <ItemList producto={products}/>
+      <ItemList products={products}/>
 
     </div>
   )
