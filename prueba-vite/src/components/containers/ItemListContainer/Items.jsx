@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Item({products}){
-    const {nombre,precio,img} = products;
+    const {id,nombre,precio,img} = products;
     return(
         <div
                                       className="card">
@@ -11,9 +12,12 @@ function Item({products}){
                                       <div className="card-body">
                                         <h5 className="card-title">{nombre}</h5>
                                         <p className="card-text">Precio: ${precio}</p>
-                                        <a href="#" className="btn btn-primary">Comprar</a>
+                                        <Link to={`/detalle/${id}`}>
+                                            <a href="#" className="btn btn-primary">Comprar</a>
+                                        </Link>
                                       </div>
                               </div>
     )
 }
 export default Item
+

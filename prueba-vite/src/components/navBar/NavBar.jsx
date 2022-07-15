@@ -1,4 +1,5 @@
 import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap'
+import { Link, NavLink } from 'react-router-dom'
 import CartWidget from '../CartWidget/CartWidget'
 import logo from '../images/logo.svg'
 
@@ -6,24 +7,31 @@ const NavBar = () => {
     return (
 <Navbar collapseOnSelect expand="lg">
   <Container>
-  <Navbar.Brand href="#home">La casa de Coco</Navbar.Brand>
+  <NavLink to='/'>La casa de Coco</NavLink>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="me-auto">
       <Nav.Link href="#features">Reseñas</Nav.Link>
       <Nav.Link href="#pricing">Historia</Nav.Link>
       <NavDropdown title="Comidas" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">Carnes</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Pastas</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Veggie</NavDropdown.Item>
-        <NavDropdown.Divider />
+        <NavLink to='/categoria/Carnes' className={({isActive}) => isActive ? 'clase' : 'clase2'} href="#action/3.1">
+             <NavDropdown.Item  href="#action/3.2">Carnes</NavDropdown.Item>
+        </NavLink>        
+        <NavLink to='/categoria/Pastas' className={({isActive}) => isActive ? 'clase' : 'clase2'} href="#action/3.1">
+             <NavDropdown.Item  href="#action/3.2">Pastas</NavDropdown.Item>
+        </NavLink>
+        <NavLink to='/categoria/Veggie' className={({isActive}) => isActive ? 'clase' : 'clase2'} href="#action/3.1">
+             <NavDropdown.Item  href="#action/3.2">Veggie</NavDropdown.Item>
+        </NavLink>        <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Bebidas</NavDropdown.Item>
       </NavDropdown>
     </Nav>
 
   </Navbar.Collapse>
+  <Link to='/cart'>
+      <CartWidget/>    
+  </Link>
   </Container>
-  <CartWidget/>
 </Navbar>
     )
 }
