@@ -4,26 +4,30 @@ let comidas = [
         categoria:'Carnes', 
         nombre: 'Hamburguesa', 
         precio: '1200',
+        stock: '4',
         detalle: 'La hamburguesa mas rica del país, no dudes en probarla!'
     },  
     {
         id: '2', 
         nombre: 'Pizza', 
         precio: '1500',
+        stock: '10',
         detalle: 'La hamburguesa mas rica del país, no dudes en probarla!'
     },
     {
       id: '3', 
       nombre: 'Empanadas', 
       precio: '1800',
-      detalle: 'La hamburguesa mas rica del país, no dudes en probarla!'
+      stock: '75',
+      detalle: 'La Empanada mas rica del país, no dudes en probarla!'
 
     },
     {
       id: '4', 
       nombre: 'Milanesas', 
       precio: '1500',
-      detalle: 'La hamburguesa mas rica del país, no dudes en probarla!'
+      stock: '50',
+      detalle: 'La milanesa mas rica del país, no dudes en probarla!'
 
     },    
     {
@@ -31,6 +35,7 @@ let comidas = [
       categoria:'Pastas', 
       nombre: 'Ravioles', 
       precio: '950',
+      stock: '100',
       detalle: 'La Pasta mas rica del país, no dudes en probarla!'
     },
     {
@@ -38,14 +43,16 @@ let comidas = [
       categoria:'Pastas', 
       nombre: 'Ñoquis',
        precio: '870',
-       detalle: 'La hamburguesa mas rica del país, no dudes en probarla!'
+       stock: '100',
+       detalle: 'La pasta mas rica del país, no dudes en probarla!'
       },
     {
       id: '7',
       categoria:'Veggie', 
       nombre: 'Ensalada', 
       precio: '600',
-      detalle: 'La hamburguesa mas rica del país, no dudes en probarla!'
+      stock: '10',
+      detalle: 'La ensalada mas rica del país, no dudes en probarla!'
     },
 
 
