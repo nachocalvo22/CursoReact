@@ -8,32 +8,32 @@ import { CartContext } from "../../../context/CarritoContext";
 
 function Details({ details }) {
 
-    const [cart, agregarCarrito, vaciarCarrito] = useContext(CartContext)
+    const {cart, agregarProducto, vaciarCarrito} = useContext(CartContext)
     const [cantidad,setCantidad] = useState();
-    console.log(cart);
 
-    const { id, nombre, precio, stock, detalle } = details;
+    const { nombre, precio, stock, detalle,img } = details;
     const funcionContador = (contador) =>{
       setCantidad(contador)
-      const producto = {item: details.nombre, quantity: contador}
-      agregarCarrito(producto)
+      const producto = {item: details, cantidad: contador}
+      agregarProducto(producto)
       console.log("El valor del contador", contador);
     }
     
+    console.log(cart);
 
     return (
         <div>
         <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+        <Card.Img variant="top" src={img} />
         <Card.Body>
           <Card.Title>{nombre}</Card.Title>
           <Card.Text>
-                {detalle} - {precio}
+                {detalle} - ${precio}
           </Card.Text>
           <Button variant="primary">COMPRAR</Button>
         </Card.Body>
       </Card>
-          {cantidad? [<Link to='/cart'><button>Terminar la compra</button> </Link>]
+          {cantidad? [<Link to='/cart'><button>Ir al carrito</button> </Link>]
           : 
           <ItemCount stock={stock} initial={1} onAdd={funcionContador} onRemove={vaciarCarrito} />}
       </div>

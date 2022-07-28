@@ -1,9 +1,12 @@
+import { useContext } from 'react'
 import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap'
 import { Link, NavLink } from 'react-router-dom'
+import { CartContext } from '../../context/CarritoContext'
 import CartWidget from '../CartWidget/CartWidget'
-import logo from '../images/logo.svg'
 
 const NavBar = () => {
+    const {cantidadTotal} = useContext(CartContext)
+
     return (
 <Navbar collapseOnSelect expand="lg">
   <Container>
@@ -20,15 +23,20 @@ const NavBar = () => {
         <NavLink to='/categoria/Pastas' className={({isActive}) => isActive ? 'clase' : 'clase2'} href="#action/3.1">
              <NavDropdown.Item  href="#action/3.2">Pastas</NavDropdown.Item>
         </NavLink>
-        <NavLink to='/categoria/Veggie' className={({isActive}) => isActive ? 'clase' : 'clase2'} href="#action/3.1">
+        <NavLink to='/categoria/veggie' className={({isActive}) => isActive ? 'clase' : 'clase2'} href="#action/3.1">
              <NavDropdown.Item  href="#action/3.2">Veggie</NavDropdown.Item>
-        </NavLink>        <NavDropdown.Divider />
+        </NavLink> 
+        <NavLink to='/categoria/Rotiseria' className={({isActive}) => isActive ? 'clase' : 'clase2'} href="#action/3.1">
+             <NavDropdown.Item  href="#action/3.2">Rotiseria</NavDropdown.Item>
+        </NavLink>         
+        <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Bebidas</NavDropdown.Item>
       </NavDropdown>
     </Nav>
 
   </Navbar.Collapse>
   <Link to='/cart'>
+    {cantidadTotal() !== 0 && cantidadTotal()}
       <CartWidget/>    
   </Link>
   </Container>

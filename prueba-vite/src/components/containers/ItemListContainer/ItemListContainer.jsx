@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
-import { gFetch } from '../../helpers/gFetch'
 import ItemList from './ItemList'
+import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
 
 
  const ItemListContainer = () => {
@@ -10,31 +10,36 @@ import ItemList from './ItemList'
     const [loading, setLoading] = useState(true)
     const {categoriaId} = useParams()
 
-    useEffect(() => {
-    if(categoriaId){
-      gFetch
-      .then( res => setProducts(res.filter( prod => prod.categoria === categoriaId)))
-      .catch( err => console.log(err))
-      .finally
-  
+
+     useEffect(() => {
+      const db = getFirestore()
+      if(categoriaId){
+        const queryCollection = collection(db,'productos')
+        const queryCollectionFilter = query(queryCollection,where('categoria','==',categoriaId)) //SOLO TRAE UN PRODCUTO CON LIMIT
+        getDocs (queryCollectionFilter)
+        .then(resp => setProducts(resp.docs.map(prod => (({id: prod.id, ...prod.data()})))))
+        .catch(err => console.log(err))
+        .finally(()=> setLoading(false))
     }else{
-      gFetch
-      .then( res => setProducts(res))
-      .catch( err => console.log(err))
-      .finally
+      const queryCollection = collection(db,'productos')
+      getDocs(queryCollection)
+      .then(resp => setProducts(resp.docs.map(prod => (({id: prod.id, ...prod.data()})))))
+      .catch(err => console.log(err))
+      .finally(()=> setLoading(false))
+
     }
 
     },[categoriaId])
 
-    console.log(categoriaId);
 
     
-  console.log(products);
   return (
     <div>
 
-      <ItemList products={products}/>
-
+       {loading?
+        <h2>Cargando...</h2> :
+        <ItemList products={products}/>
+      }
     </div>
   )
 }

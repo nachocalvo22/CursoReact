@@ -1,33 +1,36 @@
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useState } from "react"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom";
-import { gFetchDetalles } from "../../helpers/gFetchDetalle"
 import ItemDetails from "./ItemDetails";
 
 
 const ItemDetailContainer = () => {
   const [details, setDetails] = useState([])
+  const [loading, setLoading] = useState(true)
   const {detailsId} = useParams()
 
-  useEffect(() => {
-  if(detailsId){
-    gFetchDetalles
-    .then( res => setDetails(res.filter( prod => prod.id === detailsId)))
-    .catch( err => console.log(err))
-    .finally
 
-  }else{
-    gFetchDetalles
-    .then( res => setDetails(res))
-    .catch( err => console.log(err))
-    .finally
-  }
-   
-  },[detailsId])
 
-  console.log(detailsId);
+
+     useEffect(()=>{
+      const db = getFirestore()
+      const queryProduct = doc(db,'productos', detailsId)
+      getDoc(queryProduct)
+      .then((resp) => {setDetails({id: resp.id, ...resp.data()})})
+      .catch( err => console.log(err))
+      .finally(()=> setLoading(false))
+    },[detailsId])
+
+
+
   return (
-    <ItemDetails details={details}  />
+    <div>
+      {loading?
+        <h2>Cargando...</h2> :
+        <ItemDetails details={[details]}  />
+      }
+    </div>
   )
 }
 
