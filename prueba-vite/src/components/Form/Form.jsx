@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from './Input'
 
-const Formulario = () => {
+const Form = () => {
   return (
     <div>
 
@@ -10,4 +10,4 @@ const Formulario = () => {
   )
 }
 
-export default Formulario
+export default Form

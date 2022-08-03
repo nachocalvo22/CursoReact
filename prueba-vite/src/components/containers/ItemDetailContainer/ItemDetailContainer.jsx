@@ -2,6 +2,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useState } from "react"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom";
+import Loading from "../../Loading/Loading";
 import ItemDetails from "./ItemDetails";
 
 
@@ -27,7 +28,7 @@ const ItemDetailContainer = () => {
   return (
     <div>
       {loading?
-        <h2>Cargando...</h2> :
+        <Loading/> :
         <ItemDetails details={[details]}  />
       }
     </div>

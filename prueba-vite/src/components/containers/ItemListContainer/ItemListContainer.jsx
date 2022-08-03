@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import ItemList from './ItemList'
 import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
+import Loading from '../../Loading/Loading'
 
 
  const ItemListContainer = () => {
@@ -9,25 +10,22 @@ import {collection, getDocs, getFirestore, query, where} from 'firebase/firestor
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
     const {categoriaId} = useParams()
+    
+    const getFechFirestore = () =>{
+      const db = getFirestore()
+      const queryCollection = collection(db,'productos')
+      const queryCollectionFilter = categoriaId ?  query(queryCollection,where('categoria','==',categoriaId)) : queryCollection
 
+       getDocs (queryCollectionFilter)
+       .then(resp => setProducts(resp.docs.map(prod => (({id: prod.id, ...prod.data()})))))
+       .catch(err => console.log(err))
+       .finally(()=> setLoading(false))
+    }
 
      useEffect(() => {
-      const db = getFirestore()
-      if(categoriaId){
-        const queryCollection = collection(db,'productos')
-        const queryCollectionFilter = query(queryCollection,where('categoria','==',categoriaId)) //SOLO TRAE UN PRODCUTO CON LIMIT
-        getDocs (queryCollectionFilter)
-        .then(resp => setProducts(resp.docs.map(prod => (({id: prod.id, ...prod.data()})))))
-        .catch(err => console.log(err))
-        .finally(()=> setLoading(false))
-    }else{
-      const queryCollection = collection(db,'productos')
-      getDocs(queryCollection)
-      .then(resp => setProducts(resp.docs.map(prod => (({id: prod.id, ...prod.data()})))))
-      .catch(err => console.log(err))
-      .finally(()=> setLoading(false))
 
-    }
+      getFechFirestore()
+    
 
     },[categoriaId])
 
@@ -37,7 +35,7 @@ import {collection, getDocs, getFirestore, query, where} from 'firebase/firestor
     <div>
 
        {loading?
-        <h2>Cargando...</h2> :
+        <Loading/> :
         <ItemList products={products}/>
       }
     </div>
