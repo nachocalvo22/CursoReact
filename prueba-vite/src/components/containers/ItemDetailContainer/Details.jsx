@@ -18,6 +18,7 @@ function Details({ details }) {
       setQuantity(contador)
       const product = {item: details, quantity: contador}
       addItem(product)
+      console.log(product);
     }
     
 

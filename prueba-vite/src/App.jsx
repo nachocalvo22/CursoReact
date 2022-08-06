@@ -10,6 +10,7 @@ import { CarritoContext } from './context/CarritoContext';
 
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Form from './components/Form/Form';
 
 
 
@@ -26,7 +27,8 @@ function App() {
           <Route index path='/categoria/:categoriaId' element={<ItemListContainer  />}/>
           <Route path='/detalle/:detailsId' element={<ItemDetailContainer />}/>
           <Route path='/cart' element={<Cart />}/>
-          <Route path='*' element={<Navigate to='/'/>} />     
+          <Route path='*' element={<Navigate to='/'/>} />
+          <Route path='/form' element={<Form/>} />  
         </Routes>
       </div>
     </BrowserRouter>

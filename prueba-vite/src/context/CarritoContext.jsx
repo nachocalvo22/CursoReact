@@ -20,8 +20,8 @@ export const CarritoContext = ({children}) => {
             saveLocalStorage('cartList', [ ...cart, product]) 
         }
         else{
-            const total = cart[indexProducto].cantidad
-            cart[indexProducto].cantidad = total + product.quantity
+            const total = cart[indexProducto].quantity
+            cart[indexProducto].quantity = total + product.quantity
             setCart([...cart])
             saveLocalStorage('cartList', [...cart])
 
@@ -45,14 +45,7 @@ export const CarritoContext = ({children}) => {
     }
    
 
-/*     const traerCarrito = ()=> {
-        const carrito = localStorage.getItem('carrito')
-        if(carrito) {
-            return JSON.parse(carrito)
-        }else{
-            return []
-        }
-    } */
+    
     
     return (
         <div>
