@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { Button } from 'react-bootstrap'
 import { CartContext } from '../../../context/CarritoContext'
-import foto from '../../../.././assets/images/fotoBurga.jpg'
 
 const CartItems = ({product}) => {
   const {quitarCarrito} = useContext(CartContext)

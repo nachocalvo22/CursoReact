@@ -7,7 +7,7 @@ import CartItems from "./CartItems";
 
 const Cart = () => {
 
-  const {cart, emptyCart,quitarCarrito,finalPrice} = useContext(CartContext)
+  const {cart, emptyCart,finalPrice} = useContext(CartContext)
 
 console.log(cart);
 
