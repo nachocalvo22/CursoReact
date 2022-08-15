@@ -4,7 +4,7 @@
 
 
 
-Demo funcional de la pagina: https://thunderous-sunshine-871d68.netlify.app/
+Demo funcional de la pagina: https://sparkly-buttercream-0bf42a.netlify.app/
 
 - Utilizacion de distintos metodos aprendidos durante la cursada
 - Metodologias para facilitar la legibilidad del codigo
